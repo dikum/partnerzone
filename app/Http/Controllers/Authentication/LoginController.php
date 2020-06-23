@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Log;
 class LoginController extends Controller
 {
     public function index(){
+    	if(Cookie::get('user'))
+    		return redirect('/');
     	return view('authentication.login');
     }
 
@@ -54,10 +56,16 @@ class LoginController extends Controller
 
 		if($response->getStatusCode() == 200)
 		{
-			$password_token = $response->getBody()->getContents();
 
-			Cookie::queue('password_token', json_decode($password_token, true)['token']);
-			Cookie::queue('client_token', $client_token, 60);
+			$response_content = $response->getBody()->getContents();
+
+			$response_content_decoded = json_decode($response_content, true);
+
+			Cookie::queue('password_token', $response_content_decoded['token']);
+			Cookie::queue('user', $response_content_decoded['user']['user_id']);
+
+			if(session('intended'))
+				return redirect(session('intended'));
 
 			return response()->json(['message' => 'success'], 200);
 		}
