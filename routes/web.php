@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+
+Route::get('/', 'DashboardController@index');
 
 Route::get('/user-login', 'Authentication\LoginController@index');
 Route::post('/login-action', 'Authentication\LoginController@login_action');
