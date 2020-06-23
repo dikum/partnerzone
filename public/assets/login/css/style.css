@@ -1860,3 +1860,12 @@ a.fc-more:hover {
 	font-weight:bold;
 	font-style:italic;
 }
+
+.error-message{
+    font-size:1.1em;
+    color:#EE0000;
+}
+
+.error {
+  color: red;
+}
