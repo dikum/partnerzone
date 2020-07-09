@@ -44,11 +44,20 @@
     </div>
 <![endif]-->
 
+<!-- Custom CSS -->
+<link rel="stylesheet" type="text/css" href="./assets/css/windowjs/window.css">
 
-<script data-cfasync="false" src="./assets/js/email-decode.min.js"></script><script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="{{'assets/js/jquery.validate.min.js'}}"></script>
+<script data-cfasync="false" src="./assets/js/email-decode.min.js"></script>
+<!--<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/jquery.min.js"></script>-->
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/jquery-ui.min.js"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/popper.min.js"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
 
 <script src="./assets/js/waves.min.js" type="93fd9015cca482e27f619fc4-text/javascript"></script>
 
@@ -69,7 +78,13 @@
 <script src="./assets/js/vertical-layout.min.js" type="93fd9015cca482e27f619fc4-text/javascript"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom-dashboard.min.js"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/script.min.js"></script>
+
+<!-- Custom JS -->
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/clock.js"></script>
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/partner_dialog.js"></script>
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/search_partner.js"></script>
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/windowjs/window.min.js"></script>
+
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13" type="93fd9015cca482e27f619fc4-text/javascript"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript">
