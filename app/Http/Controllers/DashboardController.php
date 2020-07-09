@@ -9,11 +9,14 @@ use App\Http\Controllers\User\UserController;
 class DashboardController extends Controller
 {
     public function index(){
-    	if(UserController::isUserLoggedIn()){
-    		return view('dashboard');
-    	}
 
-    	session(['intended' => url()->full()]);
+    	if(UserController::isUserLoggedIn())
+    	{
+    		$userController =  new UserController();
+    		$user = $userController->getUser(session('user'));
+    		return view('dashboard', ['user' => explode(' ', $user->data->fullname)[0]]);
+    	}
+    	
     	return redirect('/user-login');
     }
 }
