@@ -84,7 +84,7 @@
             <div id="message" class="message"></div>
             <form  method="POST" id="login_form">
                 {{ csrf_field() }}
-                <div class="form-group"><label class="text-normal text-dark">Email</label><input type="email" class="form-control" name="email" id="email" required="true" /> </div>
+                <div class="form-group"><label class="text-normal text-dark">Email</label><input type="email" class="form-control" placeholder="Email" name="email" id="email" required="true" /> </div>
                 <div class="form-group"><label class="text-normal text-dark">Password</label><input type="password" class="form-control" placeholder="Password" name="password" id="password" required="true"></div>
                 <div class="form-group">
                     <!--<div class="peers ai-c jc-sb fxw-nw">
