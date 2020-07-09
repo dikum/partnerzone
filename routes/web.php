@@ -18,6 +18,20 @@ Route::get('/', 'DashboardController@index');
 
 Route::get('/user-login', 'Authentication\LoginController@index');
 Route::post('/login-action', 'Authentication\LoginController@login_action');
+Route::get('/logout', 'Authentication\LoginController@logout');
+
+
+Route::get('/partners', 'Partner\PartnerController@index');
+Route::post('/search-partner', 'Partner\PartnerController@search');
+
+
+
+Route::get('/countries', 'Country\CountryController@index');
+
+Route::get('/states', 'State\StateController@index');
+
+
+
 
 Route::get('/test', 'Authentication\LoginController@test');
 
