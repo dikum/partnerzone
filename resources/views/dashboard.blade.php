@@ -1,3 +1,6 @@
+@extends('layout.app')
+
+@section('content')
 
 <div class="pcoded-content">
 
@@ -7,12 +10,12 @@
 <div class="page-body">
   <div class="row">
 
-  <div style="margin: 0 auto; text-align: center;" class="col-md-8">
-    <div class='time' id="time">17:50</div>
-    <div class="date" id="date">Wednesday 24 June, 2020</div>
+  <div style="margin: 0 auto; text-align: center;">
+    <div class='time' id="time"></div>
+    <div class="date" id="date"></div>
 
     <div class="welcome">
-      Hello Rishi Malik
+      Good Morning {{$user}}
     </div>
   </div>
 </div>
@@ -29,3 +32,6 @@
 </div>
 </div>
 </div>
+
+@endsection
+
