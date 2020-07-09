@@ -33,7 +33,7 @@ $(document).ready(function(){
 				$("#submit").html("Please Wait");
 			},
 			error: function (jqXhr, textStatus, errorMessage){
-				if (jqXhr.status = 401) {
+				if (jqXhr.status == 401) {
 					$("#message").html("<i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Invalid login details");
 				}
 
@@ -50,6 +50,7 @@ $(document).ready(function(){
 			},
 			success: function(data, status, xhr){
 				if(data.message == 'success'){
+
 					window.location = "/";
 				}
 				else{
@@ -59,7 +60,7 @@ $(document).ready(function(){
 				}
 
 			},
-			timeout: 8000
+			timeout: 15000
 		});
 		return false;
     
