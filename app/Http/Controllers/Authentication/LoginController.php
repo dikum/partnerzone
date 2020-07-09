@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Authentication\TokenController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\User\UserController;
+use Carbon\Carbon;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
@@ -14,12 +16,18 @@ use Illuminate\Support\Facades\Log;
 class LoginController extends Controller
 {
     public function index(){
-    	if(Cookie::get('user'))
+    	if(UserController::isUserLoggedIn())
     		return redirect('/');
     	return view('authentication.login');
+  
     }
 
     public function login_action(Request $request){
+
+    	$credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
     	$tokenController = new TokenController();
     	$client_token = $tokenController->getClientCredential();
@@ -34,7 +42,9 @@ class LoginController extends Controller
 			$response = $client->request('POST', 'http://partnersoft.test/user-login', [
 			    'form_params' => [
 			    	'email' => $email, 
-			    	'password' => $password
+			    	'password' => $password,
+			    	'password_client_id' => PASSWORD_CLIENT_ID,
+			    	'password_client_secret' => PASSWORD_CLIENT_SECRET
 				]
 			]);
 		}
@@ -57,15 +67,11 @@ class LoginController extends Controller
 		if($response->getStatusCode() == 200)
 		{
 
-			$response_content = $response->getBody()->getContents();
+			$response_body = json_decode((string)$response->getBody()->getContents(), true);
 
-			$response_content_decoded = json_decode($response_content, true);
+			$response_body['token']['created_at'] = Carbon::now()->timestamp;
 
-			Cookie::queue('password_token', $response_content_decoded['token']);
-			Cookie::queue('user', $response_content_decoded['user']['user_id']);
-
-			if(session('intended'))
-				return redirect(session('intended'));
+			session(['token' => $response_body['token'], 'user' => $response_body['user']['user_id']]);
 
 			return response()->json(['message' => 'success'], 200);
 		}
@@ -74,14 +80,18 @@ class LoginController extends Controller
 			return response()->json(['message' => 'Invalid login details'], 401);
 
 		return response()->json(['message' => 'Sorry, there was an error. Please try again.'], 500);
-		
-
-
 
     }
 
+    public function logout(){
+
+    	session()->flush();
+    	return redirect('/user-login');
+	}
+
+
     public function test()
     {
-    	return Cookie::get('password_token');
+    	dd(session('token'));
     }
 }
