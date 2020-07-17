@@ -13,7 +13,7 @@ use Exception;
 
 class StateController extends Controller
 {
-    public function index(){
+     public function index(){
     	$tokenController = new TokenController();
     	$tokenController->validateToken();
 
