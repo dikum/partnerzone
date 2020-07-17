@@ -16,12 +16,18 @@ $(document).ready(function(){
 
 			partner_window.content.id = 'partner_content';
 
+			partner_window.on('closed', function(){
+				
+				$("#partner-icon-title").remove()
+
+			});
+
 			$.ajax({
 				url: '/partners',
 				type: 'GET',
 				dataType: 'html',
 				beforeSend: function(){
-					partner_window.content.innerHTML = "<div style='color:maroon; text-align:center;'>Please wait...</div>";
+					partner_window.content.innerHTML = "<div style='color:maroon; text-align:center;'><i class='fa fa-spinner' aria-hidden='true'></i> Please wait...</div>";
 				},
 				error: function (jqXhr, textStatus, errorMessage){
 					if (jqXhr.status == 401) {
@@ -52,6 +58,7 @@ $(document).ready(function(){
 			partner_window.show();
 		
 	});
+		
 
 
 	//Add Search Criteria
