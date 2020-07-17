@@ -1,5 +1,3 @@
-
-
 <!--[if lt IE 10]>
     <div class="ie-warning">
         <h1>Warning!!</h1>
@@ -78,12 +76,18 @@
 <script src="./assets/js/vertical-layout.min.js" type="93fd9015cca482e27f619fc4-text/javascript"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom-dashboard.min.js"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/script.min.js"></script>
-
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/notify/bootstrap-notify.min.js"></script>
 <!-- Custom JS -->
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/clock.js"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/partner_dialog.js"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/search_partner.js"></script>
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/show_partner.js"></script>
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/update_partner.js"></script>
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/delete_partner.js"></script>
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/load_dial_code.js"></script>
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/get_partner_payments.js"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/windowjs/window.min.js"></script>
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/animatedmodal/animatedModal.min.js"></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13" type="93fd9015cca482e27f619fc4-text/javascript"></script>
