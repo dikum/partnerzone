@@ -56,3 +56,98 @@ img{
 #mobile-collapse{
 	padding-top: 27px;
 }
+
+#btn-close-modal {
+   	width:5%;
+    text-align: center;
+    cursor:pointer;
+    color:#E63945;
+    font-size: 3em;
+    font-weight: lighter;
+    border-radius: 50%;
+    border-color:#E63945;
+    border-style: solid;
+    border-width: 2px;
+    margin: auto;
+}
+
+#show-partner-modal{
+
+	background-color: #FFF !important;
+}
+#show-payments-modal{
+
+	background-color: #FFF !important;
+}
+
+.modal-content{
+	padding:10px;
+}
+
+#partnerIdentifier{
+	/*background-color: #C6C5B9;*/
+	padding:10px;
+	font-weight: bolder;
+	font-size: 1.2em;
+	color: #546A7B;
+	text-decoration: underline;
+	width:120px;
+	margin-right: 20px;
+}
+
+.form-control:focus{
+	border-color:#546A7B;
+	box-shadow: none;
+}
+
+label{
+	font-size: 1em;
+	font-weight: bold;
+}
+
+.modal-content{
+	border-style: dotted;
+}
+
+.active{
+	color:#247b7B;
+	font-size: 1.5em;
+	text-transform: capitalize;
+}
+
+.inactive{
+	color:#F49F0A;
+	font-size: 1.5em;
+	text-transform: capitalize;
+}
+
+.suspended{
+	color:#D52941;
+	font-size: 1.5em;
+	text-transform: capitalize;
+
+}
+
+.veritcal-divider{
+	border-right: 1px solid #969696;
+}
+
+.same-dial-code{
+	font-size: .6em;
+	color:#EE0000;
+}
+
+.bottom{
+	position:absolute;
+	bottom:0;
+	color:#546A7B;
+}
+
+.footer-content{
+	color:#6A040F;
+	font-weight: bold;
+}
+
+.btn.btn-success{
+	background-color: #546A7B;
+}
