@@ -1869,3 +1869,8 @@ a.fc-more:hover {
 .error {
   color: red;
 }
+
+.form-control:focus{
+    border-color:#546A7B !important;
+    box-shadow: none !important;
+}
