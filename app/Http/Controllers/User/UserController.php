@@ -17,7 +17,7 @@ class UserController extends Controller
 {
 
 	public function __construct(){
-		$this->middleware('validate.token:')->except(['isUserLoggedIn']);
+		//$this->middleware('validate.token:')->except(['isUserLoggedIn']);
 
 	}
 
@@ -29,37 +29,24 @@ class UserController extends Controller
 
     public function getUser($user){
 
+    	$response = null;
     	$tokenController = new TokenController();
     	$tokenController->validateToken();
 
     	$client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $tokenController->getUserToken()]]);
 
     	try{
-			$response = $client->request('GET', 'http://partnersoft.test/users/'.$user);
-		}
-		catch(BadResponseException $e){
-			Log::error($e->getResponse()->getBody(true)->getContents());
-			return response()->json(['message' => 'The server encountered an error'], 400);
-		}
-		catch(ClientException $e){
-			Log::error($e->getResponse()->getBody(true)->getContents());
-			return response()->json(['message' => 'There was an error. Please try again.'], 400);
-		}
-		catch(RequestException $e){
-			Log::error($e->getResponse()->getBody(true)->getContents());
-			return response()->json(['message' => 'Error. Please check your connection']);
-		}
-		catch(AuthenticationException $e){
-			//$tokenController->refreshToken();
-			//getUser($user);
-		}
-		catch(Exception $e){
-			Log::error($e->getResponse()->getBody(true)->getContents());
-			return response()->json(['message' => 'There was an error. Please try again.']);
-		}
+			$this->response = $client->request('GET', 'http://partnersoft.test/users/'.$user);
+    	}
+    	catch(ClientException $e){
+    		Log::error('Could not load user information: ' . session('user'));
+    		Log::error($e);
+    		return response(['message' => 'Could not retrieve user information'], 400);
+    	}
+	
 
-		if($response->getStatusCode() == 200)
-			return json_decode($response->getBody()->getContents());
+		if($this->response->getStatusCode() == 200)
+			return json_decode($this->response->getBody()->getContents());
 		
 		return response(['message' => 'Could not retrieve user information']);
     }
