@@ -5,7 +5,7 @@
 <div class="pcoded-content">
 
 <div class="pcoded-inner-content">
-<div class="main-body">
+<div class="main-body" id="main_body">
 <div class="page-wrapper">
 <div class="page-body">
   <div class="row">
