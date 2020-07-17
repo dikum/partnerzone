@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Http\Controllers\Authentication\TokenController;
 use Carbon\Carbon;
 use Closure;
+use Illuminate\Support\Facades\Log;
 
 class ValidatePasswordToken
 {
@@ -17,7 +18,10 @@ class ValidatePasswordToken
      */
     public function handle($request, Closure $next)
     {
-        
-        return $next($request);
+        $response =  $next($request);
+
+        Log::debug('Middleware called');
+
+        return $response;
     }
 }
