@@ -30,13 +30,15 @@ $(document).ready(function(){
 			dataType: 'json',
 			beforeSend: function(){
 				$("#submit").prop("disabled", true);
-				$("#submit").html("Please Wait");
+				$("#submit").html("<i class='fa fa-spinner' aria-hidden='true'></i>");
 			},
 			error: function (jqXhr, textStatus, errorMessage){
+
 				if (jqXhr.status == 401) {
 					$("#message").html("<i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Invalid login details");
 				}
 
+				else
 				if(textStatus == 'timeout'){
 					$("#message").html("<i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Timeout. Please try again");
 				}
@@ -54,7 +56,7 @@ $(document).ready(function(){
 					window.location = "/";
 				}
 				else{
-					$("#message").html("<i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Invalid login details");
+					$("#message").html("<i class='fa fa-exclamation-triangle' aria-hidden='true'></i> " + data.message);
 					$("#submit").html("Submit");
 					$("#submit").prop('disabled', false);
 				}
