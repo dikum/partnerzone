@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Authentication\TokenController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Country\CountryController;
+use App\Http\Controllers\Title\TitleController;
 use App\Http\Controllers\User\UserController;
 use Carbon\Carbon;
 use GuzzleHttp\Exception\BadResponseException;
@@ -12,6 +14,7 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
+use Exception;
 
 class LoginController extends Controller
 {
@@ -30,38 +33,37 @@ class LoginController extends Controller
         ]);
 
     	$tokenController = new TokenController();
-    	$client_token = $tokenController->getClientCredential();
+    	try{
+    		$client_token = $tokenController->getClientCredential();
+    	}
+    	catch(RequestException $e){
+    		Log::error(($e->getResponse()->getBody(true)->getContents()));
+    			return response()->json(['message' => 'There was a problem during authentication'], 401);
+
+    	}
 
     	$email = $request->email;
     	$password = $request->password;
 
-    	$client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $client_token]]);
+		$client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $client_token]]);
 
-
-    	try{
+		try{
 			$response = $client->request('POST', 'http://partnersoft.test/user-login', [
 			    'form_params' => [
 			    	'email' => $email, 
 			    	'password' => $password,
-			    	'password_client_id' => PASSWORD_CLIENT_ID,
-			    	'password_client_secret' => PASSWORD_CLIENT_SECRET
+			    	'password_client_id' => \Config::get('constants.oauth.PASSWORD_CLIENT_ID'),
+			    	'password_client_secret' => \Config::get('constants.oauth.PASSWORD_CLIENT_SECRET')
 				]
 			]);
 		}
-		catch(BadResponseException $e){
-			Log::error($e->getResponse()->getBody(true)->getContents());
-			return response()->json(['message' => 'The server encountered an error']);
-		}
 		catch(ClientException $e){
-			Log::error($e->getResponse()->getBody(true)->getContents());
-			if($response->getStatusCode() == 401)
-				return response()->json(['message' => 'Invalid login details'], 401);
-			return response()->json(['message' => 'There was an error. Please try again.']);
+			return response()->json(['message' => 'Invalid login details'], 401);
+
 		}
-		catch(RequestException $e){
-			Log::error($e->getResponse()->getBody(true)->getContents());
-			return response()->json(['message' => 'Error. Please check your connection']);
-		}
+        catch(OAuthServerException $e){
+            return response()->json(['message' => 'Could not authenticate client application']);
+        }
 
 
 		if($response->getStatusCode() == 200)
@@ -69,9 +71,8 @@ class LoginController extends Controller
 
 			$response_body = json_decode((string)$response->getBody()->getContents(), true);
 
-			$response_body['token']['created_at'] = Carbon::now()->timestamp;
 
-			session(['token' => $response_body['token'], 'user' => $response_body['user']['user_id']]);
+			session(['token' => $response_body['token'], 'token_created_at' => Carbon::now()->timestamp - 10, 'user' => $response_body['user']]);
 
 			return response()->json(['message' => 'success'], 200);
 		}
@@ -85,6 +86,18 @@ class LoginController extends Controller
 
     public function logout(){
 
+        try{
+            $tokenController = new TokenController();
+            $tokenController->validateToken();
+        
+            $client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $tokenController->getUserToken()]]);
+
+            $response = $client->request('GET', 'http://partnersoft.test/logout');
+        }
+        catch(Exception $e){
+            Log::error($e);
+        }
+
     	session()->flush();
     	return redirect('/user-login');
 	}
@@ -92,6 +105,7 @@ class LoginController extends Controller
 
     public function test()
     {
-    	dd(session('token'));
+    	
+    	dd(isLoggedInUserAdmin());
     }
 }
