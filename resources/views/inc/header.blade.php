@@ -36,6 +36,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" href="./assets/css/custom.css">
+
+<link rel="stylesheet" type="text/css" href="./assets/css/animatedmodal/animate.min.css">
+<link rel="stylesheet" type="text/css" href="./assets/css/animatedmodal/normalize.min.css">
 </head>
 <body>
 
