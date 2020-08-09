@@ -48,7 +48,7 @@ class LoginController extends Controller
 		$client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $client_token]]);
 
 		try{
-			$response = $client->request('POST', 'http://partnersoft.test/user-login', [
+			$response = $client->request('POST', config('constants.api') .'/user-login', [
 			    'form_params' => [
 			    	'email' => $email, 
 			    	'password' => $password,
@@ -92,7 +92,7 @@ class LoginController extends Controller
         
             $client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $tokenController->getUserToken()]]);
 
-            $response = $client->request('GET', 'http://partnersoft.test/logout');
+            $response = $client->request('GET', config('constants.api') .'/logout');
         }
         catch(Exception $e){
             Log::error($e);
@@ -106,6 +106,6 @@ class LoginController extends Controller
     public function test()
     {
     	
-    	dd(isLoggedInUserAdmin());
+    	dd(session('token_created_at'));
     }
 }
