@@ -22,6 +22,8 @@ class UserController extends Controller
 	}
 
     public static function isUserLoggedIn(){
+        $tokenController = new TokenController();
+
     	if(session()->has('token') && session()->has('user'))
     		return true;
     	return false;
@@ -36,7 +38,7 @@ class UserController extends Controller
     	$client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $tokenController->getUserToken()]]);
 
     	try{
-			$this->response = $client->request('GET', 'http://partnersoft.test/users/'.$user);
+			$this->response = $client->request('GET', config('constants.api') .'/users/'.$user);
     	}
     	catch(ClientException $e){
     		Log::error('Could not load user information: ' . session('user'));
