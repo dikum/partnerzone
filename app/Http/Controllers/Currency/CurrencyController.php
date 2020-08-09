@@ -16,7 +16,7 @@ class CurrencyController extends Controller
     	$client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $tokenController->getUserToken()]]);
 
     	try{
-			$response = $client->request('GET', 'http://partnersoft.test/currencies/');
+			$response = $client->request('GET', config('constants.api') .'/currencies/');
 		}
 		catch(BadResponseException $e){
 			Log::error($e->getResponse()->getBody(true)->getContents());
