@@ -19,7 +19,7 @@ class CountryController extends Controller
     	$client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $tokenController->getUserToken()]]);
 
     	try{
-			$response = $client->request('GET', 'http://partnersoft.test/countries/');
+			$response = $client->request('GET', config('constants.api') .'/countries/');
 		}
 		catch(BadResponseException $e){
 			Log::error($e->getResponse()->getBody(true)->getContents());
