@@ -42,20 +42,16 @@
     </div>
 <![endif]-->
 
-<!-- Custom CSS -->
-<link rel="stylesheet" type="text/css" href="./assets/css/windowjs/window.css">
-
-
+<script type="text/javascript" src="./assets/js/dropzone/dropzone.js"></script>
+<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="{{'assets/js/jquery.validate.min.js'}}"></script>
 <script data-cfasync="false" src="./assets/js/email-decode.min.js"></script>
 <!--<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/jquery.min.js"></script>-->
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/jquery-ui.min.js"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/popper.min.js"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" type="text/javascript"></script>
 
 <script src="./assets/js/waves.min.js" type="93fd9015cca482e27f619fc4-text/javascript"></script>
 
@@ -77,26 +73,55 @@
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom-dashboard.min.js"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/script.min.js"></script>
 <script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/notify/bootstrap-notify.min.js"></script>
+
+<script src="./assets/js/jodit/jodit.min.js" type="text/javascript"></script>
 <!-- Custom JS -->
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/clock.js"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/partner_dialog.js"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/search_partner.js"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/show_partner.js"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/update_partner.js"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/delete_partner.js"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/load_dial_code.js"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/custom/get_partner_payments.js"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/windowjs/window.min.js"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript" src="./assets/js/animatedmodal/animatedModal.min.js"></script>
+
+<script type="text/javascript" src="./assets/js/windowjs/dialog_placement.js"></script>
+<script type="text/javascript" src="./assets/js/clock.js"></script>
+<script type="text/javascript" src="./assets/js/custom/dashboard/dashboard.js"></script>
+<script type="text/javascript" src="./assets/js/custom/partner/partner_dialog.js"></script>
+<script type="text/javascript" src="./assets/js/custom/partner/search_partner.js"></script>
+<script type="text/javascript" src="./assets/js/custom/partner/show_partner.js"></script>
+<script type="text/javascript" src="./assets/js/custom/partner/update_partner.js"></script>
+<script type="text/javascript" src="./assets/js/custom/partner/delete_partner.js"></script>
+<script type="text/javascript" src="./assets/js/custom/load_dial_code.js"></script>
+<script type="text/javascript" src="./assets/js/custom/partner/get_partner_payments.js"></script>
+<script type="text/javascript" src="./assets/js/custom/partner/delete_partner_payment.js"></script>
+<script type="text/javascript" src="./assets/js/custom/partner/register_partner.js"></script>
+<script type="text/javascript" src="./assets/js/custom/payment/payment_dialog.js"></script>
+<script type="text/javascript" src="./assets/js/custom/payment/search_payment.js"></script>
+<script type="text/javascript" src="./assets/js/custom/message/search_message_partner.js"></script>
+<script type="text/javascript" src="./assets/js/custom/message/message_template.js"></script>
+<script type="text/javascript" src="./assets/js/custom/message/send_message.js"></script>
+<script type="text/javascript" src="./assets/js/custom/toggler.js"></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13" type="93fd9015cca482e27f619fc4-text/javascript"></script>
-<script type="93fd9015cca482e27f619fc4-text/javascript">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<script type="text/javascript" src="./assets/js/windowjs/window.min.js"></script>
+<script type="text/javascript" src="./assets/js/animatedmodal/animatedModal.min.js"></script>
 
-  gtag('config', 'UA-23581568-13');
+
+<script type="text/javascript" src="./assets/js/offline/offline.js"></script>
+
+
+<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="93fd9015cca482e27f619fc4-|49" defer=""></script>
+
+<script type="text/javascript">
+    Offline.options = {
+        checkOnLoad:true,
+        interceptRequests: true,
+        reconnect: {
+            // How many seconds should we wait before rechecking.
+            initialDelay: 3,
+
+            // How long should we wait between retries.
+            delay: 10
+        },
+        requests: false,
+        //checks: {xhr: {url: 'https://google.com/'}}
+
+    }
 </script>
-<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="93fd9015cca482e27f619fc4-|49" defer=""></script></body>
+
+</body>
 </html>
