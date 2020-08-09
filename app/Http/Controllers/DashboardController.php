@@ -12,17 +12,18 @@ class DashboardController extends Controller
 {
     public function index(){
 
-    	if(UserController::isUserLoggedIn())
-    	{
-    		$userController =  new UserController();
-    		$user = $userController->getUser(session('user')['user_id']);
+    	if(!UserController::isUserLoggedIn())
+    	   return redirect('/user-login');
+        
+		$userController =  new UserController();
+		$user = $userController->getUser(session('user')['user_id']);
 
-            if(isset($user->original['message']))
-                return 'Could not load dashboard. Please contact your administrator';
+        if(isset($user->original['message']))
+            return 'Could not load dashboard. Please contact your administrator';
 
-    		return view('dashboard', ['user' => explode(' ', $user->data->fullname)[0]]);
-    	}
+		return view('dashboard', ['user' => explode(' ', $user->data->fullname)[0]]);
     	
-    	return redirect('/user-login');
+    	
+    	
     }
 }
