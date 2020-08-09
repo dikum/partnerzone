@@ -13,11 +13,11 @@ class TokenController extends Controller
     public function getClientCredential(){
 
     	$client = new \GuzzleHttp\Client();
-		$response = $client->request('POST', 'http://partnersoft.test/oauth/token', [
+		$response = $client->request('POST', config('constants.api') .'/oauth/token', [
 		    'form_params' => [
 		        'grant_type' => 'client_credentials',
-		        'client_id' => \Config::get('constants.oauth.CLIENT_ID'),
-		        'client_secret' => \Config::get('constants.oauth.CLIENT_SECRET'),
+		        'client_id' => config('constants.oauth.CLIENT_ID'),
+		        'client_secret' => config('constants.oauth.CLIENT_SECRET'),
 		        'scope' => '*'
 		   	]
 		]);
@@ -25,8 +25,14 @@ class TokenController extends Controller
 		return json_decode((string) $response->getBody(), true)['access_token'];
     }
 
+    public function checkTokenValidity(){
+    	if((Carbon::now()->timestamp - session('token_created_at')) >= 3600)
+    		return false;
+    	return true;
+    }
+
     public function validateToken(){
-    	if(Carbon::now()->timestamp > (session('token_created_at') + 60) )
+    	if((Carbon::now()->timestamp - session('token_created_at')) >= 3600)
     		$this->refreshToken();
     }
 
@@ -43,12 +49,12 @@ class TokenController extends Controller
 
     	$http = new \GuzzleHttp\Client;
 
-		$response = $http->post('http://partnersoft.test/oauth/token', [
+		$response = $http->post(config('constants.api') .'/oauth/token', [
 		    'form_params' => [
 		        'grant_type' => 'refresh_token',
 		        'refresh_token' => $this->getRefreshToken(),
-		        'client_id' => \Config::get('constants.oauth.PASSWORD_CLIENT_ID'),
-		        'client_secret' => \Config::get('constants.oauth.PASSWORD_CLIENT_SECRET'),
+		        'client_id' => config('constants.oauth.PASSWORD_CLIENT_ID'),
+		        'client_secret' => config('constants.oauth.PASSWORD_CLIENT_SECRET'),
 		        'scope' => '*'
 		    ],
 		]);
