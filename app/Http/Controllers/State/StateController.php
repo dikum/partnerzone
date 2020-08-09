@@ -20,7 +20,7 @@ class StateController extends Controller
     	$client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $tokenController->getUserToken()]]);
 
     	try{
-			$response = $client->request('GET', 'http://partnersoft.test/states/');
+			$response = $client->request('GET', config('constants.api') .'/states/');
 		}
 		catch(BadResponseException $e){
 			Log::error($e->getResponse()->getBody(true)->getContents());
