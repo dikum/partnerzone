@@ -47,5 +47,9 @@ return [
 		'lagos' => 'Lagos',
 		'south africa' => 'south africa',
 		'ghana' => 'ghana'
-	]
+	],
+
+	'api' => 'http://partnersoft.test'
+
+
 ];
