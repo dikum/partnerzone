@@ -3,11 +3,13 @@
 <script> var countries = <?php echo json_encode($countries); ?></script>
 @php $birth_country_dial_code = ''; @endphp
 
-<div id="show-partner-modal">
+<div id="show-partner-modal" class="modal-container">
     <!--"THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID-->
-    <div  id="btn-close-modal" class="close-show-partner-modal"> 
+    <div  id="btn-close-modal" class="close-show-partner-modal btn-close-modal"> 
         X
     </div>
+
+    <div class="photo"><img src="assets/images/profile/profile.jpg"></div>
     
     <div class="container" id="partner-content">
        <form id="update_partner_form" method="post">
@@ -320,6 +322,7 @@
 
 </div>
 
+
 <script>
 
     $("#show-partner").animatedModal({
@@ -339,6 +342,10 @@
         afterClose: function() {
             console.log("Closed");
         }
+    });
+
+    $('#btn-close-modal').on('click', function(){
+        $('#show-partner-section').html('');
     });
 
 </script>
