@@ -57,26 +57,21 @@ img{
 	padding-top: 27px;
 }
 
-#btn-close-modal {
-   	width:5%;
+.btn-close-modal {
+   	width:40px;
     text-align: center;
     cursor:pointer;
     color:#E63945;
-    font-size: 3em;
+    font-size: 2em;
     font-weight: lighter;
     border-radius: 50%;
     border-color:#E63945;
-    border-style: solid;
-    border-width: 2px;
+    border-style: none;
+    border-width: 1px;
     margin: auto;
 }
 
-#show-partner-modal{
-
-	background-color: #FFF !important;
-}
-#show-payments-modal{
-
+.modal-container{
 	background-color: #FFF !important;
 }
 
@@ -105,9 +100,6 @@ label{
 	font-weight: bold;
 }
 
-.modal-content{
-	border-style: dotted;
-}
 
 .active{
 	color:#247b7B;
@@ -128,7 +120,7 @@ label{
 
 }
 
-.veritcal-divider{
+.vertical-divider{
 	border-right: 1px solid #969696;
 }
 
@@ -150,4 +142,27 @@ label{
 
 .btn.btn-success{
 	background-color: #546A7B;
+}
+
+#partner-content td{
+	padding-left:5px;
+	padding-right: 5px;
+}
+
+.modal-title{
+	text-align: center;
+	font-size: 2em;
+	color:#9D0208;
+	text-decoration: underline;
+	margin: auto;
+}
+
+.photo{
+	max-width:150px;
+	max-height: 150px;
+	margin: auto;
+}
+
+.search-toggler{
+	cursor: pointer;
 }
