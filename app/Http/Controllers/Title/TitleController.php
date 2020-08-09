@@ -20,7 +20,7 @@ class TitleController extends Controller
     	$client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $tokenController->getUserToken()]]);
 
     	try{
-			$response = $client->request('GET', 'http://partnersoft.test/titles/');
+			$response = $client->request('GET', config('constants.api') .'/titles/');
 		}
 		catch(BadResponseException $e){
 			Log::error($e->getResponse()->getBody(true)->getContents());
