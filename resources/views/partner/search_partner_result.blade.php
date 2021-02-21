@@ -1,7 +1,8 @@
 <div id='partners'>
 
 	<table class='table table-hover table table-striped table-bordered table-sm' id='partnerTable'>
-		<tbody>
+		<caption>Partner Search Result</caption>
+		<thead>
 			<tr>
 				<th>ID</th>
 				<th>Status</th>
@@ -10,10 +11,10 @@
 				<th>Phone</th>
 				<th>Action</th>
 			</tr>
-
+		</thead>
 			@php $row_number = 1; @endphp
 			@foreach($partners as $partner)
-
+			<tbody>
 				<tr>
 					<td>{{$partner['partnerIdentifier']}}</td>
 					<td>{{$partner['userStatus']}}</td>
