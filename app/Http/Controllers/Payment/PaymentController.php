@@ -3,20 +3,23 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Authentication\TokenController;
+use App\Http\Controllers\BankStatement\BankStatementController;
+use App\Http\Controllers\Bank\BankController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Currency\CurrencyController;
 use App\Http\Controllers\User\UserController;
+use App\Traits\BankStatementTrait;
 use Exception;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Bank\BankController;
-use App\Http\Controllers\Currency\CurrencyController;
 
 class PaymentController extends Controller
 {
     
+	use BankStatementTrait;
 
 	public function index(){
 		if(!UserController::isUserLoggedIn())
@@ -169,7 +172,7 @@ class PaymentController extends Controller
 			return response()->json(['message' => 'There was an error. Please try again.']);
 		}
 
-		if($response->getStatusCode() == 200)
+		if($response->getStatusCode() == 200){
 
 			$currencyController = new CurrencyController();
 			$currencies = json_decode($currencyController->index()->getData(), true)['data'];
@@ -183,10 +186,30 @@ class PaymentController extends Controller
 				return view('payment.search_payment_result', ['payments' => $payments, 'currencies' => $currencies, 'banks' => $banks]);
 			else
 				return response('No record found');
+		}
 
 		if($response->getStatusCode() == 401)
 			return response()->json(['message' => 'Sorry, you are not authorized to view this page']);
 		
 		return response()->json(['message' => 'Could not retrieve payment information']);
+	}
+
+	public function save_strong_room_payment(Request $request){
+
+		//Enter bank statement
+		//if payment is valid enter payment
+		//else delete bankstatement
+		//If first payment, generate Partner ID
+		//Send welcome SMS / Email
+		//send payment  sms / Email
+		//if sent return success
+
+		$inserted_bank_statement = json_decode($this->insertStrongRoomStatement($request));
+		
+		if($inserted_bank_statement['message'] != 'success')
+			return $inserted_bank_statement;
+		
+		
+		
 	}
 }
