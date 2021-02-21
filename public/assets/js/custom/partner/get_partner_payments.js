@@ -38,8 +38,20 @@ function showPartnerPayments(partner, partner_name){
 
 				$('#partner-message').html('');
 				$('#partner-payments-section').html(data);
-				$('#partner-name').html(partner_name);
+				//$('#partner-name').html(partner_name);
 				$('#show-payments').trigger('click');
+				var table = $('#partnerPaymentTable').DataTable({
+					autoWidth: true,
+					dom: 'Bfrtip',
+        			buttons: [
+			            'excelHtml5',
+			            {
+			            	extend:'pdfHtml5',
+			            	orientation: 'landscape',
+                			pageSize: 'LEGAL'
+			        	}
+        			]
+   				});
 			}
 
 		},
@@ -47,4 +59,3 @@ function showPartnerPayments(partner, partner_name){
 	});
 
 }
-
