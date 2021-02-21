@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$(document).on('change', '#countryOfResidence', function(event){
 		var selectedCountry = $(this).val();
 
+		//countries variable gotten from show partner blade
 		for (var i = 0; i<countries.length; i++) {
 			if(countries[i]['countryIdentifier'] == selectedCountry){
 				dial_code = countries[i]['countryDialingCode'];
