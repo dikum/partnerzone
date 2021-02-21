@@ -149,7 +149,7 @@ label{
 	padding-right: 5px;
 }
 
-.modal-title{
+.custom-modal-title{
 	text-align: center;
 	font-size: 2em;
 	color:#9D0208;
@@ -165,4 +165,54 @@ label{
 
 .search-toggler{
 	cursor: pointer;
+}
+
+.hide{
+	display: none;
+}
+
+.full-payment-details{
+	background-color: #343A40;
+	display: inline-block;
+	margin:auto;
+	float: right;
+	color:#CCC;
+	z-index: 999999999999;
+	text-align: center;
+}
+
+.payment-content{
+
+	margin:10px;
+}
+
+.remove-search{
+	color:maroon;
+	cursor:pointer;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+
+.add-object{
+	margin: auto;
+	cursor: pointer;
+}
+
+.white-label
+{
+   float: left;
+   color:white;
+}
+
+.modal, .modal-backdrop {
+    position: absolute !important;
+}
+
+.pad-row{
+	margin-bottom: 30px;
+}
+
+.greyed{
+	padding: 10px;
+	/*background: rgba(33, 27, 41, 1);*/
 }
