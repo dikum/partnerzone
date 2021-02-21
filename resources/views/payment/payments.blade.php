@@ -1,9 +1,15 @@
+<div class='full-payment-details'>
+	
+	<div class="payment-content"></div>
+
+</div>
 <section>
+	
 	<div style="text-align:center;" id='payment-message'></div>
 	<div class='container' style="padding-top:50px;">
 		<nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
 
-			<div class='collapse navbar-collapse' id='partnerSearch'>
+			<div class='navbar-collapse' id='partnerSearch'>
 				
 				<form class='mt-2 mt-md-0' id="search_payment_form">
 					{{ csrf_field() }}
@@ -64,38 +70,39 @@
 		</nav>
 
 		<div id='payments'>
-			<table class='table table-hover table table-striped table-bordered table-sm' id='paymentTable'>
-                <tbody>
+			<table class='table table-hover table-striped table-sm' id='paymentTable'>
+                <thead class="thead-dark">
                     <tr>
+                    	<th>Partner ID</th>
                         <th>Pay Date</th>
                         <th>Entered Date</th>
                         <th>Amount</th>
                         <th>Bank</th>
-                        <th>Depositor</th>
+                        <th class="hide">Depositor</th>
                         <th>Entered By</th>
                         <th>Channel</th>
-                        <th>Description</th>
-                        <th>Partner ID</th>
-                        <th>Email</th>
-                        <th>Phone</th>
+                        <th class="hide">Description</th>
+                        <th class="hide">Email</th>
+                        <th class="hide">Phone</th>
                         <th>Action</th>
                     </tr>
-
-                    @php $row_number = 1; @endphp
-                    @foreach($payments as $payment)
-
-                        <tr>
+               	</thead>
+               		<tbody>
+	                    @php $row_number = 1; @endphp
+	                    @foreach($payments as $payment)
+                    
+                        <tr class="payment-row">
+                        	<td>{{$payment['friendlyPartnerIdentifier']}}</td>
                             <td>{{$payment['datePaid']}}</td>
                             <td>{{$payment['createdDate']}}</td>
                             <td>{{getCurrencyCodeFromCollection($currencies, $payment['currencyIdentifier'])}} {{$payment['amountPaid']}}</td>
                             <td>{{getBankNameFromCollection($banks, $payment['bankIdentifier'])}}</td>
-                            <td>{{$payment['depositor']}}</td>
+                            <td class="hide payment-depositor">{{$payment['depositor']}}</td>
                             <td>{{$payment['userIdentifier']}}</td>
                             <td>{{$payment['paymentChannel']}}</td>
-                            <td>{{$payment['paymentDescription']}}</td>
-                            <td>{{$payment['friendlyPartnerIdentifier']}}</td>
-                            <td>{{$payment['emailAddress']}}</td>
-                            <td>{{$payment['phoneNumber']}}</td>
+                            <td class="hide payment-description">{{$payment['paymentDescription']}}</td>
+                            <td class="hide payment-email">{{$payment['emailAddress']}}</td>
+                            <td class="hide payment-phone">{{$payment['phoneNumber']}}</td>
                             <td>
 
                                 @if(getBankNameFromCollection($banks, $payment['bankIdentifier'])  == 'strongroom')<a href='#' onclick="modifyPayment('<?php echo $payment['paymentIdentifier'];?>')" > <i class='fa fa-edit fa-2x' style='color:#52B788; margin-right: 10px;'></i></a> @endif
@@ -112,6 +119,8 @@
 		</div>
 	</div>
 </section>
+
+
 
 
 
