@@ -6,7 +6,7 @@
         X
     </div>
 
-    <div id="partner-name">Register Partner</div>
+    <div class="custom-modal-title">Register Partner</div>
     
     <div class="container" id="partner-content">
        <form id="register_partner_form" method="post"  style="margin-top: 50px;">
@@ -15,7 +15,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col vertical-divider">
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='title'>Title</label>
                                 <select class="form-control" id="titleIdentifier" name="titleIdentifier">
@@ -35,7 +35,7 @@
                         </div>
 
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='gender'>Gender</label>
                                 <select name="gender" id="gender" class="form-control">
@@ -54,7 +54,7 @@
 
                         </div>
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='countryOfResidence'>Resident Country</label>
                                 <select class="form-control" id="countryOfResidence" name="countryOfResidence">
@@ -92,7 +92,7 @@
                         </div>
 
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='emailAddress'>Email</label>
                                 <input type="email" name="emailAddress" id="emailAddress" class="form-control">
@@ -105,12 +105,12 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='phoneNumber'>Phone</label>
                                 <div class="input-group">
                                     
-                                    <span id='primaryPhoneDialCode' class="input-group-prepend input-group-text"></span><input type="text" name="phoneNumber" id="phoneNumber" class="form-control">
+                                    <span id='primaryPhoneDialCode' class="input-group-prepend input-group-text"></span><input type="tel" name="phoneNumber" id="phoneNumber" class="form-control">
                                     
                                 </div>
                             </div>
@@ -119,14 +119,14 @@
                                 <label for='secondaryPhoneNumber'>Alternative Phone <span class="same-dial-code">Same dial code <input id="same-dial-code" type="checkbox"></span></label>
                                 <div class="input-group">
                                     
-                                    <input type="text" name="secondaryPhoneNumber" id="secondaryPhoneNumber" class="form-control">
+                                    <input type="tel" name="secondaryPhoneNumber" id="secondaryPhoneNumber" class="form-control">
                                     
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for="residentialAddress">Residential Address</label>
                                 <textarea class="form-control" name="residentialAddress" id="residentialAddress"></textarea>
@@ -142,7 +142,7 @@
 
                      <div class="col">
                          
-                         <div class="row">
+                         <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='maritalStatus'>Marital Status</label>
                                 <select class="form-control" id="maritalStatus" name="maritalStatus">
@@ -159,7 +159,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='preferredLanguage'>Preferred Language</label>
                                 <select class="form-control" id="preferredLanguage" name="preferredLanguage">
