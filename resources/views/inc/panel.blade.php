@@ -17,6 +17,13 @@
 								<span class="pcoded-mtext">Partners</span>
 							</a>
 						</li>
+
+						<li class="pcoded-hasmenu" id="show-statement">
+							<a href="javascript:void(0)" class="waves-effect waves-dark hide-arrow">
+								<span class="pcoded-micon"><i class="feather icon-book"></i></span>
+								<span class="pcoded-mtext">Bank Statements</span>
+							</a>
+						</li>
 						<li class="pcoded-hasmenu" id="payment">
 							<a href="javascript:void(0)" class="waves-effect waves-dark hide-arrow">
 								<span class="pcoded-micon"><i class="feather icon-credit-card"></i></span>
@@ -39,7 +46,7 @@
 										</a>
 									</li>
 
-									<li class="">
+									<li class="" id="show-message-log">
 										<a href="javascript:void(0)" class="waves-effect waves-dark">
 											<span><i class="fa fa-history"></i> Log</span>
 										</a>
