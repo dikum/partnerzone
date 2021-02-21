@@ -30,6 +30,7 @@ $(document).ready(function(){
 				$("#partner-icon-title").remove()
 
 			});
+
 			$.ajax({
 				url: '/partners',
 				type: 'GET',
@@ -87,7 +88,7 @@ $(document).ready(function(){
 
 		search_criteria_count++;
 		
-		$('#criteria_div').append("<div class='row'>"
+		$('#criteria_div').append("<div class='row dynamic-search-criteria'>"
 							+"<div class='form-group'>"
 								+"<select id='search_criteria_select_" + search_criteria_count + "' name='search_criteria_select_" + search_criteria_count + "' class='form-control mr-sm-2 select_criteria'>"
 									+"<option value='partnerIdentifier'>Partner ID</option>"
@@ -101,9 +102,15 @@ $(document).ready(function(){
 								+"</select>"
 							+"</div>"
 						
-							+"<div class='form-group' style='margin-left: 5px;' id='search_text_div_" + search_criteria_count + "' >  </div>"
+							+"<div class='form-group dynamic-text-div' style='margin-left: 5px;' id='search_text_div_" + search_criteria_count + "' > <i class='fa fa-minus remove-partner-search-criteria remove-search' aria-hidden='true'></i>  </div>"
 						
 						+"</div>");
+
+	});
+
+	//Remove Search Criteria
+	$(document).on('click', '.remove-partner-search-criteria', function(event){
+		$(this).parents('.dynamic-search-criteria').remove();
 
 	});
 
