@@ -41,8 +41,7 @@ class UserController extends Controller
 			$this->response = $client->request('GET', config('constants.api') .'/users/'.$user);
     	}
     	catch(ClientException $e){
-    		Log::error('Could not load user information: ' . session('user'));
-    		Log::error($e);
+    		Log::error('Could not load user information: ' . $user);
     		return response(['message' => 'Could not retrieve user information'], 400);
     	}
 	
