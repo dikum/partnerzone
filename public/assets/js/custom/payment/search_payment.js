@@ -41,8 +41,10 @@ $(document).ready(function(){
 				},
 				success: function(data, status, xhr){
 					$("#payment-message").html("");
-					if(data != 'No record found')
+					if(data != 'No record found'){
 						$('#payments').html(data);
+						var table = $('#paymentTable').DataTable({autoWidth: true});
+					}
 					else
 						$('#payment-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> No record found </div>");
 				},
