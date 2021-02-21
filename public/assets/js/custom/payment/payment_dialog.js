@@ -55,6 +55,7 @@ $(document).ready(function(){
 						//window selected is the class name of the created window
 						$('.window_selected').css('zIndex',  "9999");
 						payment_window.content.innerHTML = data;
+						var table = $('#paymentTable').DataTable({autoWidth: true});
 
 						$("#icon-title-list").append("<li><div class='icon-title' id='payment-icon-title'><img src='./assets/images/payment.png'></div></li>");
 					}
@@ -79,5 +80,39 @@ $(document).ready(function(){
 		bringToFront(dialogId);
 		payment_window.show();
 	});
+
+	$(document).on('mouseenter', '.payment-row', function(e){
+
+		var description = $(this).find('.payment-description').text();
+		var depositor = $(this).find('.payment-depositor').text();
+		var email = $(this).find('.payment-email').text();
+		var phone = $(this).find('.payment-phone').text();
+		//var x = e.pageX - 80;
+		//var y = e.pageY - 70;
+
+		var dialog_position = payment_window.getPosition();
+		var dialog_size = payment_window.getSize();
+		
+
+		$('.payment-content').html("<p><strong>" +email+ " </strong>  <strong>" +phone+ "</strong></p> <p>" +depositor+ "</p> <p>" +description+ "</p>");
+
+		var x = dialog_position.x;
+		var y = dialog_size.width - 500;
+
+		$('.full-payment-details').css({position:'fixed', left:x, top:y});
+		$('.full-payment-details').css({display:'block'});
+
+
+		
+	});
+
+	$(document).on('mouseleave', '.payment-row', function(){
+
+		$('.full-payment-details').css({display:'none'});
+		$('.payment-content').text('');
+		
+	});
+
+
 
 });
