@@ -51,8 +51,10 @@ class PartnerController extends Controller
 		if($response->getStatusCode() == 200)
 
 			$partners = json_decode($response->getBody()->getContents(), true)['data'];
+			$titleController = new TitleController();
+			$titles = $titleController->index();
 
-			return view('partner.partners', ['partners' => $partners]);
+			return view('partner.partners', ['partners' => $partners, 'titles' => $titles]);
 
 		
 		return response()->json(['message' => 'Could not retrieve user information']);
@@ -62,7 +64,6 @@ class PartnerController extends Controller
     public function search(Request $request){
     	if(!UserController::isUserLoggedIn())
     		redirect('/user-login');
-
     	$search_query = '?';
 
     	$count = 0;
@@ -90,6 +91,7 @@ class PartnerController extends Controller
 
     	$search_query .= 'do-not-paginate';
 
+    	Log::debug($search_query);
     	//$search_query = substr($search_query, 0 , strlen($search_query) -1);
 
     	$tokenController = new TokenController();
@@ -454,7 +456,9 @@ class PartnerController extends Controller
 
 			$payments = json_decode($response->getBody()->getContents(), true)['data'];
 
-			return view('partner.partner_payments', ['payments' => $payments, 'currencies' => $currencies, 'banks' => $banks]);
+			$partner = $this->getPartner($partner);
+	
+			return view('partner.partner_payments', ['payments' => $payments, 'currencies' => $currencies, 'banks' => $banks, 'partner' => $partner]);
 
 		if($response->getStatusCode() == 401)
 			return json_decode(['message' => 'Sorry, you are not authorized to view this page']);
@@ -484,4 +488,27 @@ class PartnerController extends Controller
 
 		return view('partner.register_partner', ['titles'=>$titles, 'countries'=>$countries, 'currencies'=>$currencies, 'states'=>$states]);
 	}
+
+	public function getPartner($partner){
+
+    	$response = null;
+    	$tokenController = new TokenController();
+    	$tokenController->validateToken();
+
+    	$client = new \GuzzleHttp\Client(['headers' => ['Authorization' => 'Bearer ' . $tokenController->getUserToken()]]);
+
+    	try{
+			$this->response = $client->request('GET', config('constants.api') .'/partners/'.$partner);
+    	}
+    	catch(ClientException $e){
+    		Log::error('Could not load partner information: ' . $partner);
+    		return response(['message' => 'Could not retrieve user information'], 400);
+    	}
+	
+
+		if($this->response->getStatusCode() == 200)
+			return json_decode($this->response->getBody()->getContents(), true)['data'];
+		
+		return response(['message' => 'Could not retrieve user information']);
+    }
 }
