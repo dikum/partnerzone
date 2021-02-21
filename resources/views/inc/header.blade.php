@@ -12,6 +12,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
 <link rel="icon" type="image/png" sizes="192x192" href="./assets/images/android-chrome-192x192.png">
@@ -34,7 +35,11 @@
 
 <link href="{{'assets/font-awesome/css/font-awesome.min.css'}}" rel="stylesheet">
 
-<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+<!--<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">-->
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
+
+
 
 <link rel="stylesheet" type="text/css" href="./assets/css/custom.css">
 
@@ -88,7 +93,36 @@
 					</li>
 
 				</ul>
+
+
 				<ul class="nav-right">
+					<li class="header-notification">
+						<div class="dropdown-primary dropdown">
+							<div class="dropdown-toggle" data-toggle="dropdown">
+								<i class="feather icon-bell"></i>
+								<span id='notification-count' class="badge bg-c-red"></span>
+							</div>
+							<ul id="notification-list" class="show-notification notification-view dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+
+								<li id='bulk_message_notification' class="hidden-notification" style="display: none">
+									<div class='media'>
+									<img class='img-radius' src='./assets/images/icons/message.png'>
+									<div class='media-body'>
+									<h5 class='notification-user'> Sending message(s)</h5>
+									<p class='notification-msg partner-batch-email'></p>
+									<p class='notification-msg partner-sms'></p>
+									<p class='notification-msg list-batch-email'></p>
+									<p class='notification-msg list-sms'></p>
+									<span class='notification-time'> </span>
+									<span class='message-error' style='color:maroon'> </span> 
+									</div>
+									</div>
+								</li>
+								
+							</ul>
+						</div>
+					</li>
+
 					<li class="user-profile header-notification">
 						<div class="dropdown-primary dropdown">
 							<div class="dropdown-toggle" data-toggle="dropdown">
@@ -104,7 +138,7 @@
 							</ul>
 						</div>
 					</li>
-				</ul>
+				</ul>	
 			</div>
 		</div>
 	</nav>
