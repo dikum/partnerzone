@@ -5,16 +5,17 @@ namespace App\Http\Controllers\Authentication;
 use App\Http\Controllers\Authentication\TokenController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Country\CountryController;
+use App\Http\Controllers\Message\MessageController;
 use App\Http\Controllers\Title\TitleController;
 use App\Http\Controllers\User\UserController;
 use Carbon\Carbon;
+use Exception;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Log;
-use Exception;
 
 class LoginController extends Controller
 {
@@ -39,7 +40,6 @@ class LoginController extends Controller
     	catch(RequestException $e){
     		Log::error(($e->getResponse()->getBody(true)->getContents()));
     			return response()->json(['message' => 'There was a problem during authentication'], 401);
-
     	}
 
     	$email = $request->email;
@@ -103,9 +103,7 @@ class LoginController extends Controller
 	}
 
 
-    public function test()
-    {
-    	
-    	dd(session('token_created_at'));
+    public function test(){
+    	abort(404);
     }
 }
