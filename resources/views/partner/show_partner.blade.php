@@ -39,8 +39,8 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col veritcal-divider">
-                        <div class="row">
+                    <div class="col vertical-divider">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='title'>Title</label>
                                 <select class="form-control" id="titleIdentifier" name="titleIdentifier">
@@ -64,7 +64,7 @@
                         </div>
 
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='gender'>Gender</label>
                                 <select name="gender" id="gender" class="form-control">
@@ -96,7 +96,7 @@
 
                         </div>
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='countryOfResidence'>Resident Country</label>
                                 <select class="form-control" id="countryOfResidence" name="countryOfResidence">
@@ -151,7 +151,7 @@
                         </div>
 
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='emailAddress'>Email</label>
                                 <input type="email" name="emailAddress" id="emailAddress" class="form-control" value="{{$partner['emailAddress']}}">
@@ -164,7 +164,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='phoneNumber'>Phone</label>
                                 <div class="input-group">
@@ -185,7 +185,7 @@
                         </div>
 
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for="residentialAddress">Residential Address</label>
                                 <textarea class="form-control" name="residentialAddress" id="residentialAddress">{{$partner['residentialAddress']}}</textarea>
@@ -201,7 +201,7 @@
 
                      <div class="col">
                          
-                         <div class="row">
+                         <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='maritalStatus'>Marital Status</label>
                                 <select class="form-control" id="maritalStatus" name="maritalStatus">
@@ -222,7 +222,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='preferredLanguage'>Preferred Language</label>
                                 <select class="form-control" id="preferredLanguage" name="preferredLanguage">
@@ -254,7 +254,7 @@
                         </div>
 
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col">
                                 <label for='donationAmount'>Pledge</label>
                                 <input type="number" name="donationAmount" id="donationAmount" class="form-control" min="" value="{{$partner['donationAmount']}}">
@@ -283,7 +283,7 @@
 
                         </div>
 
-                        <div class="row">
+                        <div class="row pad-row">
                             <div class="form-group col-6">
                                 <label for='userBranch'>Branch</label>
                                 <select class="form-control" id="userBranch" name="userBranch">
