@@ -49,6 +49,9 @@ $(document).ready(function(){
 					if(data != 'No record found'){
 						$('#partner-list').html(data);
 						table = $('#messagePartnerTable').DataTable({autoWidth: true});
+						$('html, body').animate({
+        					scrollTop: $("#partner-list").offset().top
+    					}, 1000);
 					}
 					else{
 						
@@ -74,7 +77,7 @@ $(document).ready(function(){
 
 		search_criteria_count++;
 		
-		$('#message_criteria_div').append("<div class='row'>"
+		$('#message_criteria_div').append("<div class='row dynamic-search-criteria'>"
 							+"<div class='form-group'>"
 								+"<select id='message_search_criteria_select_" + search_criteria_count + "' name='message_search_criteria_select_" + search_criteria_count + "' class='form-control mr-sm-2 message_select_criteria'>"
 									+"<option value='partnerIdentifier'>Partner ID</option>"
@@ -88,9 +91,15 @@ $(document).ready(function(){
 								+"</select>"
 							+"</div>"
 						
-							+"<div class='form-group' style='margin-left: 5px;' id='message_search_text_div_" + search_criteria_count + "' >  </div>"
+							+"<div class='form-group' style='margin-left: 5px;' id='message_search_text_div_" + search_criteria_count + "' > <i class='fa fa-minus remove-message-partner-search-criteria remove-search' aria-hidden='true'></i>  </div>"
 						
 						+"</div>");
+
+	});
+
+	//Remove Search Criteria
+	$(document).on('click', '.remove-message-partner-search-criteria', function(event){
+		$(this).parents('.dynamic-search-criteria').remove();
 
 	});
 
