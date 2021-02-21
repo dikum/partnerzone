@@ -48,8 +48,21 @@ $(document).ready(function(){
 				},
 				success: function(data, status, xhr){
 					$("#partner-message").html("");
-					if(data != 'No record found')
+					if(data != 'No record found'){
 						$('#partners').html(data);
+						var table = $('#partnerTable').DataTable({
+							autoWidth: true,
+							dom: 'Bfrtip',
+        					buttons: [
+			            		'excelHtml5',
+			            		{
+					            	extend:'pdfHtml5',
+					            	orientation: 'landscape',
+		                			pageSize: 'LEGAL'
+			        			}
+        					]
+						});
+					}
 					else
 						$('#partner-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> No record found </div>");
 				},
