@@ -83,7 +83,6 @@
 
 		</nav>
 		<form id="send-message-form">
-			{{ csrf_field() }}
 		<div class="row">
 
 			<div class="form-group col-3">
@@ -133,5 +132,8 @@
 		</div>
 
 	</form>
-	<div id='partner-list'></div>
 </section>
+<div style="padding:5px;" id='partner-list'></div>
+
+
+
