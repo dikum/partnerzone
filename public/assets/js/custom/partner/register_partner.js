@@ -123,7 +123,6 @@ $(document).ready(function(){
 
 				},
 				success: function(data, status, xhr){
-					console.log(data);
 					if(data.message == 'success')
 						$.notify(
 							{	
