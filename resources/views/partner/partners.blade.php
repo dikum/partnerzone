@@ -2,7 +2,7 @@
 	<div style="text-align:center;" id='partner-message'></div>
 	<div class='container' style="padding-top:50px;">
 		<div id="search-partner-toggler"><i class='search-toggler fa fa-plus' aria-hidden='true' id="toggler-icon"></i></div>
-		<nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark' style="display: none;" id='searchPartnerNav'>
+		<nav class='navbar navbar-expand-md navbar-dark fixed-top bg-dark' style="display: none; margin-bottom: 50px;" id='searchPartnerNav'>
 
 			<div class='collapse navbar-collapse' id='partnerSearch'>
 				
@@ -46,7 +46,8 @@
 				</form>
 
 			</div>
-			<button id="show-partner-registration" class="float-right btn btn-default">Add Partner</button>
+			<!--<button id="show-partner-registration" class="float-right btn btn-default">Add Partner</button>-->
+			<image id="show-partner-registration" class='add-object' src="{{'assets/images/add.png'}}" />
 
 		</nav>
 
@@ -69,7 +70,7 @@
 
 						<tr>
 							<td>{{$partner['partnerIdentifier']}}</td>
-							<td>{{$partner['fullname']}}</td>
+							<td>{{getTitleNameFromCollection($titles, $partner['titleIdentifier'])}} {{$partner['fullname']}}</td>
 							<td>{{$partner['emailAddress']}}</td>
 							<td>{{$partner['phoneNumber']}}</td>
 							<td>
@@ -91,7 +92,9 @@
 
 <section id="show-partner-section"></section>
 <section id="partner-payments-section"></section>
-<section id="register-payments-section"></section>
+<section id="register-payments-section"></sectio0n>
+
+
 
 
 
