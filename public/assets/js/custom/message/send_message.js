@@ -36,9 +36,11 @@ $(document).ready(function(){
 				type: 'GET',
 				dataType: 'html',
 				beforeSend: function(){
+					$("#send-message-btn").prop("disabled", true);
 					create_message_window.content.innerHTML = "<div style='color:maroon; text-align:center;'><i class='fa fa-spinner' aria-hidden='true'></i> Please wait...</div>";
 				},
 				error: function (jqXhr, textStatus, errorMessage){
+					$("#send-message-btn").prop("disabled", false);
 					if (jqXhr.status == 401) {
 						create_message_window.content.innerHTML = "<div style='color:maroon; text-align:center;><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Sorry, you are not authorized to view this page</div>";
 					}
@@ -53,7 +55,7 @@ $(document).ready(function(){
 				},
 				success: function(data, status, xhr){
 					if(xhr.status == 200){
-
+						$("#send-message-btn").prop("disabled", false);
 						//window selected is the class name of the create window
 						$('.window_selected').css('zIndex',  "9999");
 						create_message_window.content.innerHTML = data;
@@ -102,77 +104,87 @@ $(document).ready(function(){
 
 		function submitForm(){
 
-			var data = $('#send-message-form').serializeArray();
+			var formData = $('#send-message-form').serializeArray();
+			var tableRows;
+
 			var mesasgePartnerTable = getPartnerMessageTable();
 			if(mesasgePartnerTable != null && mesasgePartnerTable != 'undefined'){
 				var tableRows = mesasgePartnerTable.rows().data().toArray();
-				data.push({name: 'tableData', value: tableRows});
+				//formData = formData.concat({name: 'tableData', value: tableRows});
 
 			}
 			event.preventDefault();
-			$.ajax({
-				url: '/send-message',
-				type: 'POST',
-				//data: $.param(data),
-				data: data,
-				dataType: 'json',
-				beforeSend: function(){
-					$('#create-message').html("<div style='color:maroon; text-align:center;'> Please wait... </div>");
+			if(Offline.check()){
+				$.ajax({
+					url: '/send-bulk-message',
+					type: 'POST',
+					//data: $.param(data),
+					//contentType: "application/json",
+					headers: {
+	        			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    			},
+					data: {formData:formData, tableData:tableRows},
+					dataType: 'json',
+					beforeSend: function(){
+						$('#create-message').html("<div style='color:maroon; text-align:center;'> Sending... </div>");
 
-					$("#send-message-btn").prop("disabled", false);
-					$("#send-message-btn").html("<i class='fa fa-spinner' aria-hidden='true'></i>");
-				},
-				error: function (jqXhr, textStatus, errorMessage){
-					if(jqXhr.status == 401)
-						$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Sorry, you are not authorized.</div>");
+						$("#send-message-btn").prop("disabled", false);
+						$("#send-message-btn").html("<i class='fa fa-spinner' aria-hidden='true'></i>");
 
-					else if(jqXhr.status == 404)
-						$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Could not find message information</div>");
+					},
+					error: function (jqXhr, textStatus, errorMessage){
 
-					else if(jqXhr.status == 403){
-						$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Unauthorized access</div>");
-					}
+						$('#bulk_message_notification').remove();
 
-					else if(jqXhr.status == 422){
-						$('#create_message_window-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Unauthorized access</div>");
-					}
-					
-					else if(textStatus == 'timeout')
-						$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Timeout. Please try again </div>");
+						if(jqXhr.status == 401)
+							$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Sorry, you are not authorized.</div>");
 
-					else
-						$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> There was a problem. Please try again.</div>");
+						else if(jqXhr.status == 404)
+							$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Could not find message information</div>");
 
-				},
-				success: function(data, status, xhr){
-					if(data.message == 'success'){
-						$.notify(
-							{	
-								message: "<i class='fa fa-info-circle' aria-hidden='true'></i> Message Sending..."
-							},
-							{
-								type: 'success'
-							}
-						);
+						else if(jqXhr.status == 403){
+							$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Unauthorized access</div>");
+						}
 
-						$('#create-message').html('');
+						else if(jqXhr.status == 422){
+							$('#create_message_window-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Unauthorized access</div>");
+						}
+						
+						else if(textStatus == 'timeout')
+							$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> Timeout. Please try again </div>");
 
-						setPartnerMessageTable(); //Resets the table after success
-					}
-					else
-						$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> " + data.message + "</div>");
-				},
-				complete: function(jqXhr, status){
+						else
+							$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> There was a problem. Please try again.</div>");
 
-					$("#send-message-btn").prop("disabled", false);
-					$("#send-message-btn").html("Send");
+					},
+					success: function(data, status, xhr){
+						if(data.message == 'success'){
 
-					//$('#template-message').html('');
+							//$("#bulk_message_notification").find('.notification-time').html("<label class='label label-success'>Completed</label>");
+							//$("#bulk_message_notification .notification-time").html("<label class='label label-success'>Completed</label>");
 
-				},
-				timeout: 15000
-			});
-			return false;
+							$('#create-message').html('');
+
+							setPartnerMessageTable(); //Resets the table after success
+						}
+						else
+							$('#create-message').html("<div style='color:maroon; text-align:center;'><i class='fa fa-exclamation-triangle' aria-hidden='true'></i> " + data.message + "</div>");
+					},
+					complete: function(jqXhr, status){
+
+						$("#send-message-btn").prop("disabled", false);
+						$("#send-message-btn").html("Send");
+
+						//$('#template-message').html('');
+
+					}//,
+					//timeout: 15000
+				});
+				return false;
+			}
+			else{
+				alert('Please check your internet connection');
+			}
 
 		}
 	});
