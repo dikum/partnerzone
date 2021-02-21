@@ -16,6 +16,31 @@ function getCurrencyCodeFromCollection($currencies, $currency_id){
 
 }
 
+function getTitleNameFromCollection($titles, $title_id){
+	
+	foreach($titles as $title){
+
+		if($title['titleIdentifier'] == $title_id)
+			return $title['titleName'];
+	}
+
+	return 'Unknown';
+
+}
+
+function getCurrencyIDFromCollection($currencies, $currency_code){
+	
+	foreach($currencies as $currency){
+
+		if($currency['currencyShortName'] == $currency_code)
+			return $currency['currencyIdentifier'];
+	}
+
+	return 'Unknown';
+
+}
+
+
 function getBankNameFromCollection($banks, $bank_id){
 
 	foreach($banks as $bank){
@@ -44,4 +69,9 @@ function getCountryNameFromCollection($countries, $country_id){
 
 function getTemplateMessageFromCollection($templates, $template){
 	
+}
+
+function generateRandomCode(){
+	$permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+	return substr(str_shuffle($permitted_chars), 0, 10);
 }
